@@ -1,0 +1,6 @@
+# Gradle
+.gradle
+gen
+bin
+out
+build

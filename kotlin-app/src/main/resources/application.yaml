@@ -1,0 +1,14 @@
+spring:
+  kafka:
+    bootstrap-servers: 127.0.0.1:9092
+    template:
+      default-topic: game
+
+  jackson:
+    deserialization:
+      fail_on_unknown_properties: true
+
+logging:
+  level:
+    de.igorakkerman.demo.kafka: DEBUG
+
