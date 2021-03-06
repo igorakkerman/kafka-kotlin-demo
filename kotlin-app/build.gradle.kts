@@ -34,6 +34,8 @@ dependencies {
         exclude(module = "junit")
         exclude(module = "mockito-core")
     }
+
+    annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 }
 
 java.sourceCompatibility = JavaVersion.VERSION_15

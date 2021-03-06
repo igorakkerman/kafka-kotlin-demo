@@ -1,10 +1,5 @@
-# Takeaway.com recruiting assignment
+# Kafka Kotlin Demo 
 
-## Task
-### Introduction
-
-
-## Solution
 ### Assumptions
 ### Application
 ### Data model
