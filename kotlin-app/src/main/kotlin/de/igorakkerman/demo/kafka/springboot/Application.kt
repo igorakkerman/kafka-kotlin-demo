@@ -7,6 +7,10 @@ import org.springframework.boot.runApplication
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
+fun main(commandLineArguments: Array<String>) {
+    runApplication<Application>(*commandLineArguments)
+}
+
 @SpringBootApplication(scanBasePackages = ["de.igorakkerman.demo.kafka"])
 class Application
 
@@ -16,6 +20,3 @@ class ServiceConfiguration {
     fun gameService(moveMessageProducer: MoveMessageProducer) = GameService(moveMessageProducer)
 }
 
-fun main(commandLineArguments: Array<String>) {
-    runApplication<Application>(*commandLineArguments)
-}
