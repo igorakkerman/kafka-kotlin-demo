@@ -1,7 +1,7 @@
 package de.igorakkerman.demo.kafka.springboot
 
 import de.igorakkerman.demo.kafka.application.GameService
-import de.igorakkerman.demo.kafka.application.MoveProducer
+import de.igorakkerman.demo.kafka.application.MoveMessageProducer
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.context.annotation.Bean
@@ -13,7 +13,7 @@ class Application
 @Configuration
 class ServiceConfiguration {
     @Bean
-    fun gameService(moveProducer: MoveProducer) = GameService(moveProducer)
+    fun gameService(moveMessageProducer: MoveMessageProducer) = GameService(moveMessageProducer)
 }
 
 fun main(commandLineArguments: Array<String>) {
