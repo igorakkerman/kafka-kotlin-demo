@@ -19,6 +19,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-validation")
 
     implementation("org.springframework.kafka:spring-kafka")
+    testImplementation("org.springframework.kafka:spring-kafka-test")
 
     implementation("io.github.microutils:kotlin-logging-jvm:2.0.4")
 
@@ -35,7 +36,8 @@ dependencies {
         exclude(module = "mockito-core")
     }
 
-    annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
+    testImplementation("org.testcontainers:junit-jupiter:1.15.2")
+    testImplementation("org.testcontainers:kafka:1.15.2")
 }
 
 java.sourceCompatibility = JavaVersion.VERSION_15

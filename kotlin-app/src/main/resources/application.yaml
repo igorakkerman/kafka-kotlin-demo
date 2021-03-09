@@ -4,9 +4,8 @@ spring:
     template:
       default-topic: game
 
-  jackson:
-    deserialization:
-      fail_on_unknown_properties: true
+    consumer:
+      auto-offset-reset: earliest
 
 logging:
   level:
