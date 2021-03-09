@@ -2,6 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm") version "1.4.30"
+    kotlin("kapt") version "1.4.30"
     kotlin("plugin.spring") version "1.4.21"
     id("org.springframework.boot") version "2.4.3"
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
@@ -38,6 +39,9 @@ dependencies {
 
     testImplementation("org.testcontainers:junit-jupiter:1.15.2")
     testImplementation("org.testcontainers:kafka:1.15.2")
+
+    kapt("org.springframework.boot:spring-boot-configuration-processor")
+    kaptTest("org.springframework.boot:spring-boot-configuration-processor")
 }
 
 java.sourceCompatibility = JavaVersion.VERSION_15
