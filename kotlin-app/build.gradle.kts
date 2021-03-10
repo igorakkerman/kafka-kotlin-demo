@@ -26,16 +26,15 @@ dependencies {
 
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.11.4")
 
+    testImplementation("org.springframework.boot:spring-boot-starter-test") {
+        exclude(module = "junit")
+        exclude(module = "mockito-core")
+    }
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.1")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.1")
 
     testImplementation("io.kotest:kotest-assertions-core-jvm:4.4.1")
     testImplementation("com.ninja-squad:springmockk:3.0.1")
-
-    testImplementation("org.springframework.boot:spring-boot-starter-test") {
-        exclude(module = "junit")
-        exclude(module = "mockito-core")
-    }
 
     testImplementation("org.testcontainers:junit-jupiter:1.15.2")
     testImplementation("org.testcontainers:kafka:1.15.2")
