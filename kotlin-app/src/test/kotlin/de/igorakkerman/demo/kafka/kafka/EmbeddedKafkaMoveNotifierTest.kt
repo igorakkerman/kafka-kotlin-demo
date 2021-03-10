@@ -1,5 +1,6 @@
 package de.igorakkerman.demo.kafka.kafka
 
+import de.igorakkerman.demo.kafka.application.Move
 import de.igorakkerman.demo.kafka.springboot.Application
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
@@ -22,7 +23,9 @@ internal class EmbeddedKafkaMoveNotifierTest(
 ) {
     @Test
     internal fun `should be able to send a message`() {
-        producer.notifyPlayers("${LocalDateTime.now().format(ofPattern("yyyy-MM-dd HH:mm:ss"))} Cinka liegt im Bett!'")
+        val now = LocalDateTime.now().format(ofPattern("yyyy-MM-dd HH:mm:ss"))
+
+        producer.notifyPlayers(Move("Cinka", 321))
         consumer.latch.await(10, SECONDS)
 
         consumer.latch.count shouldBe 0

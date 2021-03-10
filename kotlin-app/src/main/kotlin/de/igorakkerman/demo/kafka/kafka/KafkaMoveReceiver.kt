@@ -1,5 +1,6 @@
 package de.igorakkerman.demo.kafka.kafka
 
+import de.igorakkerman.demo.kafka.application.Move
 import de.igorakkerman.demo.kafka.application.MoveReceiver
 import mu.KotlinLogging
 import org.springframework.kafka.annotation.KafkaListener
@@ -13,10 +14,9 @@ class KafkaMoveReceiver : MoveReceiver {
     val latch = CountDownLatch(1)
 
     @KafkaListener(id = "openear", topics = ["game"])
-    fun listen(message: String) {
-        log.info("Message received: $message")
+    fun listen(move: Move) {
+        log.info("Move received: $move")
         latch.countDown()
     }
-
 }
 

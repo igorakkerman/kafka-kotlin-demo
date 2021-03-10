@@ -1,5 +1,5 @@
 package de.igorakkerman.demo.kafka.application
 
 interface MoveNotifier {
-    fun notifyPlayers(move: String)
+    fun notifyPlayers(move: Move)
 }
