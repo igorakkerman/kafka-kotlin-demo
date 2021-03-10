@@ -1,6 +1,6 @@
 package de.igorakkerman.demo.kafka.kafka
 
-import de.igorakkerman.demo.kafka.kafka.ContainerKafkaMoveMessageProducerTest.KafkaTestContainersConfiguration
+import de.igorakkerman.demo.kafka.kafka.ContainerKafkaMoveNotifierTest.KafkaTestContainersConfiguration
 import de.igorakkerman.demo.kafka.springboot.Application
 import io.kotest.matchers.shouldBe
 import org.apache.kafka.clients.consumer.ConsumerConfig
@@ -35,11 +35,11 @@ import java.util.concurrent.TimeUnit.SECONDS
 @Testcontainers
 @Import(KafkaTestContainersConfiguration::class)
 @DirtiesContext
-internal class ContainerKafkaMoveMessageProducerTest(
+internal class ContainerKafkaMoveNotifierTest(
     @Autowired
-    private val producer: KafkaMoveMessageProducer,
+    private val producer: KafkaMoveNotifier,
     @Autowired
-    private val consumer: KafkaMoveMessageConsumer,
+    private val consumer: KafkaMoveReceiver,
 ) {
     @TestConfiguration
     @ConditionalOnProperty("test.container.enabled", havingValue = "true")
@@ -75,7 +75,7 @@ internal class ContainerKafkaMoveMessageProducerTest(
     @Test
     internal fun `should be reading a message`() {
         val now = LocalDateTime.now().format(ofPattern("yyyy-MM-dd HH:mm:ss"))
-        producer.sendMessage("$now Cinka sitzt in der Box!")
+        producer.notifyPlayers("$now Cinka sitzt in der Box!")
         consumer.latch.await(10, SECONDS)
 
         consumer.latch.count shouldBe 0

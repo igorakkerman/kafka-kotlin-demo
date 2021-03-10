@@ -14,15 +14,15 @@ import java.util.concurrent.TimeUnit.SECONDS
 @SpringBootTest(classes = [Application::class])
 @EmbeddedKafka(partitions = 1, brokerProperties = ["listeners=PLAINTEXT://localhost:9092", "port=9092"])
 @DirtiesContext
-internal class EmbeddedKafkaMoveMessageProducerTest(
+internal class EmbeddedKafkaMoveNotifierTest(
     @Autowired
-    private val producer: KafkaMoveMessageProducer,
+    private val producer: KafkaMoveNotifier,
     @Autowired
-    private val consumer: KafkaMoveMessageConsumer,
+    private val consumer: KafkaMoveReceiver,
 ) {
     @Test
     internal fun `should be able to send a message`() {
-        producer.sendMessage("${LocalDateTime.now().format(ofPattern("yyyy-MM-dd HH:mm:ss"))} Cinka liegt im Bett!'")
+        producer.notifyPlayers("${LocalDateTime.now().format(ofPattern("yyyy-MM-dd HH:mm:ss"))} Cinka liegt im Bett!'")
         consumer.latch.await(10, SECONDS)
 
         consumer.latch.count shouldBe 0
