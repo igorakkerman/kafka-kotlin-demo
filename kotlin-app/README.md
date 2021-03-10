@@ -15,6 +15,6 @@ For JUnit integration tests, two different approaches are used:
    allowing to have an experience, as close to the real environment as possible.
    
    Note:
-     - TODO: Only runs if `spring.profiles.active` includes `containertest`.
+     - TODO: Only runs if `spring.profiles.active` includes `container-test`.
      - The Docker daemon must be running.
      - The port may remain in use after a test run, causing the new run to fail.

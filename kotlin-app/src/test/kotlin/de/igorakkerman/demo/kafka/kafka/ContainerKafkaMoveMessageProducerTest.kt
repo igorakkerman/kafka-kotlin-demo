@@ -31,7 +31,7 @@ import java.time.format.DateTimeFormatter.ofPattern
 import java.util.concurrent.TimeUnit.SECONDS
 
 @SpringBootTest(classes = [Application::class])
-@EnabledIf("\${test.container.enabled}", loadContext = true)
+@EnabledIf(expression = "\${test.container.enabled:false}", loadContext = true)
 @Testcontainers
 @Import(KafkaTestContainersConfiguration::class)
 @DirtiesContext
