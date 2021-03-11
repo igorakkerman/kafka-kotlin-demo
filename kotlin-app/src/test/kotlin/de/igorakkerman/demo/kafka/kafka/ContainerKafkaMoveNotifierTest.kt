@@ -41,18 +41,21 @@ internal class ContainerKafkaMoveNotifierTest(
     @TestConfiguration
     @ConditionalOnProperty("test.container.enabled", havingValue = "true")
     internal class KafkaTestContainersConfiguration {
+
         @Container
         val kafkaContainer = KafkaContainer(DockerImageName.parse("confluentinc/cp-kafka:5.4.3"))
             .apply { start() }
+
+        private fun <K, V> MutableMap<K, V>.alsoMap(vararg pairs: Pair<K, V>) = apply { putAll(pairs) }
 
         @Bean
         fun kafkaListenerContainerFactory(
             kafkaProperties: KafkaProperties,
         ) = ConcurrentKafkaListenerContainerFactory<Int, String>().also {
             it.consumerFactory = DefaultKafkaConsumerFactory(
-                kafkaProperties.buildConsumerProperties().also {
-                    it[ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG] = kafkaContainer.bootstrapServers
-                }
+                kafkaProperties.buildConsumerProperties().alsoMap(
+                    ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG to kafkaContainer.bootstrapServers,
+                )
             )
         }
 
@@ -60,9 +63,9 @@ internal class ContainerKafkaMoveNotifierTest(
         fun producerFactory(
             kafkaProperties: KafkaProperties,
         ) = DefaultKafkaProducerFactory<Any, Any>(
-            kafkaProperties.buildProducerProperties().also {
-                it[ProducerConfig.BOOTSTRAP_SERVERS_CONFIG] = kafkaContainer.bootstrapServers
-            }
+            kafkaProperties.buildProducerProperties().alsoMap(
+                ProducerConfig.BOOTSTRAP_SERVERS_CONFIG to kafkaContainer.bootstrapServers,
+            )
         )
     }
 
