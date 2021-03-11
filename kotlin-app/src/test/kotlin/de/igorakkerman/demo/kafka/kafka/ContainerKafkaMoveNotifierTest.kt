@@ -43,7 +43,7 @@ internal class ContainerKafkaMoveNotifierTest(
     internal class KafkaTestContainersConfiguration {
         @Container
         val kafkaContainer = KafkaContainer(DockerImageName.parse("confluentinc/cp-kafka:5.4.3"))
-            .also { it.start() }
+            .apply { start() }
 
         @Bean
         fun kafkaListenerContainerFactory(
