@@ -26,9 +26,11 @@ internal class EmbeddedKafkaMoveNotifierTest(
         val now = LocalDateTime.now().format(ofPattern("yyyy-MM-dd HH:mm:ss"))
 
         producer.notifyPlayers(Move("Cinka", 321))
-        consumer.latch.await(10, SECONDS)
 
-        consumer.latch.count shouldBe 0
+        consumer.latch.apply {
+            await(10, SECONDS)
+            count shouldBe 0
+        }
     }
 }
 
