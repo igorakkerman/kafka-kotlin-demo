@@ -73,8 +73,9 @@ internal class ContainerKafkaMoveNotifierTest(
     internal fun `should be reading a message`() {
         val now = LocalDateTime.now().format(ofPattern("yyyy-MM-dd HH:mm:ss"))
         producer.notifyPlayers(Move("Cinka", 101))
-        consumer.latch.await(10, SECONDS)
-
-        consumer.latch.count shouldBe 0
+        consumer.latch.apply {
+            await(10, SECONDS)
+            count shouldBe 0
+        }
     }
 }
