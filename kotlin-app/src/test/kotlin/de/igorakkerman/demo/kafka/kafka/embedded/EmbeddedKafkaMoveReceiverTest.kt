@@ -12,10 +12,8 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.kafka.core.ProducerFactory
 import org.springframework.kafka.test.context.EmbeddedKafka
-import org.springframework.kafka.test.utils.KafkaTestUtils
 import org.springframework.test.annotation.DirtiesContext
 import java.time.LocalDateTime
-import java.util.regex.Pattern
 
 @SpringBootTest(classes = [Application::class])
 @EmbeddedKafka(partitions /* per topic */ = 1, brokerProperties = ["listeners=PLAINTEXT://localhost:9092", "port=9092"])

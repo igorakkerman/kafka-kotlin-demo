@@ -5,8 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 
 @SpringBootTest(classes = [Application::class])
-class ApplicationConfigTest(
-) {
+class ApplicationConfigTest {
     @Test
     fun contextLoads() {
     }
