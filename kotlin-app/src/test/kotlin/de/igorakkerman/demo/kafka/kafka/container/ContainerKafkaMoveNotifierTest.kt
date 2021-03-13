@@ -1,7 +1,9 @@
-package de.igorakkerman.demo.kafka.kafka
+package de.igorakkerman.demo.kafka.kafka.container
 
 import de.igorakkerman.demo.kafka.application.Move
-import de.igorakkerman.demo.kafka.kafka.ContainerKafkaMoveNotifierTest.KafkaTestContainersConfiguration
+import de.igorakkerman.demo.kafka.kafka.KafkaMoveNotifier
+import de.igorakkerman.demo.kafka.kafka.KafkaMoveReceiver
+import de.igorakkerman.demo.kafka.kafka.container.ContainerKafkaMoveNotifierTest.KafkaTestContainersConfiguration
 import de.igorakkerman.demo.kafka.springboot.Application
 import io.kotest.matchers.shouldBe
 import org.apache.kafka.clients.consumer.ConsumerConfig
@@ -72,7 +74,7 @@ internal class ContainerKafkaMoveNotifierTest(
     @Test
     internal fun `should be reading a message`() {
         val now = LocalDateTime.now().format(ofPattern("yyyy-MM-dd HH:mm:ss"))
-        producer.notifyPlayers(Move("Cinka", 101))
+        producer.notifyPlayers(Move("Cinka", 101, now))
         consumer.latch.apply {
             await(10, SECONDS)
             count shouldBe 0

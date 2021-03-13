@@ -1,6 +1,8 @@
-package de.igorakkerman.demo.kafka.kafka
+package de.igorakkerman.demo.kafka.kafka.embedded
 
 import de.igorakkerman.demo.kafka.application.Move
+import de.igorakkerman.demo.kafka.kafka.KafkaMoveNotifier
+import de.igorakkerman.demo.kafka.kafka.KafkaMoveReceiver
 import de.igorakkerman.demo.kafka.springboot.Application
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
