@@ -18,3 +18,8 @@ For JUnit integration tests, two different approaches are used:
      - TODO: Only runs if `spring.profiles.active` includes `container-test`.
      - The Docker daemon must be running.
      - The port may remain in use after a test run, causing the new run to fail.
+
+## Learnings
+- Run Kafka on Docker / Docker Compose
+- Configure Spring Boot to use Kafka
+- Testing with Spring Boot and Kafka using embedded Kafka and TestContainers
