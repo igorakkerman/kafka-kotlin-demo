@@ -7,8 +7,11 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties
 import org.springframework.boot.test.context.TestConfiguration
 import org.springframework.context.annotation.Bean
+import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory
+import org.springframework.kafka.core.ConsumerFactory
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory
 import org.springframework.kafka.core.DefaultKafkaProducerFactory
+import org.springframework.kafka.core.ProducerFactory
 import org.testcontainers.containers.KafkaContainer
 import org.testcontainers.junit.jupiter.Container
 import org.testcontainers.utility.DockerImageName
@@ -35,9 +38,23 @@ internal class TestContainersConfiguration {
     @Bean
     fun producerFactory(
         kafkaProperties: KafkaProperties,
-    ) = DefaultKafkaProducerFactory<Any, Any>(
+    ) = DefaultKafkaProducerFactory<String, Move>(
         kafkaProperties.buildProducerProperties().alsoMap(
             ProducerConfig.BOOTSTRAP_SERVERS_CONFIG to kafkaContainer.bootstrapServers,
         )
     )
+
+    @Bean
+    // Spring Boot autoconfiguration requires generic type <Any, Any>
+    fun producerFactory(
+        concreteFactory: ProducerFactory<String, Move>
+    ): ProducerFactory<out Any, out Any> = concreteFactory
+
+    @Bean
+    fun kafkaListenerContainerFactory(
+        kafkaProperties: KafkaProperties,
+        consumerFactory: ConsumerFactory<String, Move>
+    ) = ConcurrentKafkaListenerContainerFactory<String, Move>().also {
+        it.consumerFactory = consumerFactory
+    }
 }
