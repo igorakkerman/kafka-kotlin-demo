@@ -15,9 +15,7 @@ spring:
       group-id: game-player
       properties:
         spring:
-          json:
-            trusted:
-              packages: de.igorakkerman.demo.kafka.*
+          json.trusted.packages: de.igorakkerman.demo.kafka.*
 
 logging:
   level:
