@@ -15,12 +15,9 @@ class KafkaMoveReceiver(
 ) : MoveReceiver {
     private val log = KotlinLogging.logger {}
 
-    val latch = CountDownLatch(1)
-
     @KafkaListener(topics = ["game"])
     fun listen(move: Move) {
-        latch.countDown()
-        log.info("Move received: $move, new latch count: ${latch.count}")
+        log.info("Move received: $move")
         gameService.registerMove(move)
     }
 }
