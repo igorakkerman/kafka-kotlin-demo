@@ -45,7 +45,7 @@ internal class ContainerKafkaMoveReceiverTest(
         producer.flush()
 
         // then
-        verify(timeout = 3000) { gameService.registerMove(move) }
+        verify(timeout = 3000) { gameService.acceptMove(move) }
     }
 }
 

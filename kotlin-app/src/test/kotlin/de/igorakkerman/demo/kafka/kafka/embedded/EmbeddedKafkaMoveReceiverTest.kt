@@ -40,7 +40,7 @@ internal class EmbeddedKafkaMoveReceiverTest(
         producer.flush()
 
         // then
-        verify(timeout = 3000) { gameService.registerMove(move) }
+        verify(timeout = 3000) { gameService.acceptMove(move) }
     }
 }
 

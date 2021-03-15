@@ -8,8 +8,8 @@ class GameService(private val moveNotifier: MoveNotifier) {
 
     private val log = KotlinLogging.logger {}
 
-    fun registerMove(move: Move) {
-        log.info("Registering move: $move")
+    fun acceptMove(move: Move) {
+        log.info("Accepting move: $move")
         moves.add(move)
     }
 }
