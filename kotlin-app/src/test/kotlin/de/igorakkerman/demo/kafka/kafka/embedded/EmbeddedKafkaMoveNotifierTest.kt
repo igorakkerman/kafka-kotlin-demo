@@ -2,11 +2,11 @@ package de.igorakkerman.demo.kafka.kafka.embedded
 
 import de.igorakkerman.demo.kafka.application.Move
 import de.igorakkerman.demo.kafka.kafka.KafkaMoveNotifier
-import de.igorakkerman.demo.kafka.springboot.Application
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.kafka.core.ConsumerFactory
 import org.springframework.kafka.test.context.EmbeddedKafka
@@ -14,7 +14,8 @@ import org.springframework.kafka.test.utils.KafkaTestUtils
 import org.springframework.test.annotation.DirtiesContext
 import java.time.LocalDateTime
 
-@SpringBootTest(classes = [Application::class])
+@SpringBootTest(classes = [KafkaMoveNotifier::class])
+@EnableAutoConfiguration
 @EmbeddedKafka(partitions /* per topic */ = 1, brokerProperties = ["listeners=PLAINTEXT://localhost:9092", "port=9092"])
 @DirtiesContext
 internal class EmbeddedKafkaMoveNotifierTest(
