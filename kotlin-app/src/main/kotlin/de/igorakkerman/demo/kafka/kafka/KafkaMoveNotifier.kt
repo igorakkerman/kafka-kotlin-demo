@@ -14,18 +14,17 @@ class KafkaMoveNotifier(
 ) : MoveNotifier {
     private val log = KotlinLogging.logger {}
 
-    override fun notifyPlayers(move: Move) =
-        log.info("Sending move: $move").run {
-            kafkaTemplate.sendDefault(move).addCallback(
-                object : ListenableFutureCallback<SendResult<String, Move>> {
-                    override fun onSuccess(result: SendResult<String, Move>?) {
-                        log.info("Move sent. move: $move, offset: ${result?.recordMetadata?.offset()}")
-                    }
+    override fun notifyPlayers(move: Move) {
+        log.info("Sending move: $move")
 
-                    override fun onFailure(exception: Throwable) {
-                        log.info("Unable to send move: $move, reason: ${exception.message}")
-                    }
-                }
-            )
-        }
+        kafkaTemplate.sendDefault(move).addCallback(
+            object : ListenableFutureCallback<SendResult<String, Move>> {
+                override fun onSuccess(result: SendResult<String, Move>?) =
+                    log.info("Move sent. move: $move, offset: ${result?.recordMetadata?.offset()}")
+
+                override fun onFailure(exception: Throwable) =
+                    log.info("Unable to send move: $move, reason: ${exception.message}")
+            }
+        )
+    }
 }
