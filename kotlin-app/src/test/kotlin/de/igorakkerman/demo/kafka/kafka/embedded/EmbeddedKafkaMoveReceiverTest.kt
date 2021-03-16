@@ -4,6 +4,7 @@ import com.ninjasquad.springmockk.MockkBean
 import de.igorakkerman.demo.kafka.application.GameService
 import de.igorakkerman.demo.kafka.application.Move
 import de.igorakkerman.demo.kafka.kafka.KafkaMoveReceiver
+import io.mockk.excludeRecords
 import io.mockk.verify
 import org.apache.kafka.clients.producer.ProducerRecord
 import org.junit.jupiter.api.Test
@@ -36,6 +37,7 @@ internal class EmbeddedKafkaMoveReceiverTest(
         val producer = producerFactory.createProducer()
 
         // GameService mock is relaxed
+        excludeRecords { gameService.toString() }
 
         // when
         producer.send(ProducerRecord(topic, move))
@@ -45,4 +47,3 @@ internal class EmbeddedKafkaMoveReceiverTest(
         verify(timeout = 3000) { gameService.acceptMove(move) }
     }
 }
-
