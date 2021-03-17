@@ -15,14 +15,12 @@ import org.springframework.context.annotation.Import
 import org.springframework.kafka.core.ProducerFactory
 import org.springframework.test.annotation.DirtiesContext
 import org.springframework.test.context.junit.jupiter.EnabledIf
-import org.testcontainers.junit.jupiter.Testcontainers
 import java.time.LocalDateTime
 
 @SpringBootTest(classes = [KafkaMoveReceiver::class])
 @EnabledIf(expression = "\${test.container.enabled:false}", loadContext = true)
 @EnableAutoConfiguration
 @Import(TestContainersConfiguration::class)
-@Testcontainers
 @DirtiesContext
 internal class ContainerKafkaMoveReceiverTest(
     @Autowired

@@ -14,10 +14,12 @@ import org.springframework.kafka.core.DefaultKafkaProducerFactory
 import org.springframework.kafka.core.ProducerFactory
 import org.testcontainers.containers.KafkaContainer
 import org.testcontainers.junit.jupiter.Container
+import org.testcontainers.junit.jupiter.Testcontainers
 import org.testcontainers.utility.DockerImageName
 
 @TestConfiguration
 @ConditionalOnProperty("test.container.enabled", havingValue = "true")
+@Testcontainers
 internal class TestContainersConfiguration {
 
     @Container

@@ -13,14 +13,12 @@ import org.springframework.kafka.core.ConsumerFactory
 import org.springframework.kafka.test.utils.KafkaTestUtils
 import org.springframework.test.annotation.DirtiesContext
 import org.springframework.test.context.junit.jupiter.EnabledIf
-import org.testcontainers.junit.jupiter.Testcontainers
 import java.time.LocalDateTime
 
 @SpringBootTest(classes = [KafkaMoveNotifier::class])
 @EnabledIf(expression = "\${test.container.enabled:false}", loadContext = true)
 @EnableAutoConfiguration
 @Import(TestContainersConfiguration::class)
-@Testcontainers
 @DirtiesContext
 internal class ContainerKafkaMoveNotifierTest(
     @Autowired
