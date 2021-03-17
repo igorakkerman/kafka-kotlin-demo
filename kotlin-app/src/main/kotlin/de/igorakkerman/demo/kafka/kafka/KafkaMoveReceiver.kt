@@ -9,13 +9,12 @@ import org.springframework.stereotype.Component
 
 @Component
 class KafkaMoveReceiver(
-    val gameService: GameService
+    private val gameService: GameService
 ) : MoveReceiver {
     private val log = KotlinLogging.logger {}
 
     @KafkaListener(topics = ["game"])
     fun listen(move: Move) {
-        log.info("Move received: $move")
         gameService.acceptMove(move)
     }
 }
