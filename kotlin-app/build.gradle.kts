@@ -10,6 +10,7 @@ plugins {
 
 repositories {
     mavenCentral()
+    maven("https://repo.spring.io/snapshot")
 }
 
 dependencies {
@@ -25,6 +26,8 @@ dependencies {
     implementation("io.github.microutils:kotlin-logging-jvm:2.0.6")
 
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.11.4")
+
+    testImplementation("org.springframework:spring-test:5.3.6-SNAPSHOT")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude(module = "junit")
